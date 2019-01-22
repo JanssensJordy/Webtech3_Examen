@@ -8,16 +8,11 @@
 <body>
   <h2>Result</h2>
   <br/><br/>
-  <p class='product'>
-   <span><b>Name : </b><%= product.name %></span><br/>
-   <span><b>Description : </b><%= product.description %></span><br/>
-   <span><b>Price : </b><%= product.price %></span><br/>
-  </p>
-
-  <form action='/delete' method='POST'>
-    <span><input type='hidden' name='name' value='<%=product.name%>'></span>
-    <span><button type='submit'>Delete</button></span>
-  </form>
+  <ul>
+    <%for (var examen in student){%>
+      <li><%=student[examen].name%><br/>Examen: <%=student[examen].examen%> <br/>Reden: <%=student[examen].reden%> <br/> Datum: <%=student[examen].datum%></li>    
+      <%}%>
+    </ul>
 
 </body>
 </html>

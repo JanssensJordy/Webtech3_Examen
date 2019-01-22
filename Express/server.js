@@ -25,15 +25,6 @@ app.get("/", (req, res) => {
   res.redirect("/aanvraag");
 });
 
-app.get("/list", (req, res) => {
-  db.collection("inhaal")
-    .find()
-    .toArray((err, result) => {
-      if (err) return console.log(err);
-      res.render("list.ejs", { products: result });
-    });
-});
-
 app.get("/aanvraag", (req, res) => {
   res.render("aanvraag.ejs", {});
 });
@@ -41,23 +32,22 @@ app.get("/aanvraag", (req, res) => {
 app.post("/aanvraag", (req, res) => {
   db.collection("inhaal").insertOne(req.body, (err, result) => {
     if (err) return console.log(err);
-    res.redirect("/list");
+    res.redirect("/search");
   });
 });
 
 app.get("/search", (req, res) => {
-  res.render("search.ejs", { product: "" });
+  res.render("search.ejs", { student: "" });
 });
 
-
-app.post("/search", (req, res) => {
+app.post("/list", (req, res) => {
   var query = { name: req.body.name };
-  db.collection("products")
+  db.collection("inhaal")
     .find(query)
     .toArray(function(err, result) {
       if (err) return console.log(err);
       if (result == "") res.render("search_not_found.ejs", {});
-      else res.render("search_result.ejs", { product: result[0] });
+      else res.render("search_result.ejs", { student: result});
     });
 });
 
