@@ -6,10 +6,10 @@ const MongoClient = require("mongodb").MongoClient;
 var db;
 
 MongoClient.connect(
-  "mongodb://localhost:27017/products",
+  "mongodb://localhost:27017/examen",
   (err, client) => {
     if (err) return console.log(err);
-    db = client.db("products"); // whatever your database name is
+    db = client.db("examen");
     app.listen(3000, () => {
       console.log("listening on 3000");
     });
@@ -22,11 +22,11 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  res.redirect("/list");
+  res.redirect("/aanvraag");
 });
 
 app.get("/list", (req, res) => {
-  db.collection("products")
+  db.collection("inhaal")
     .find()
     .toArray((err, result) => {
       if (err) return console.log(err);
@@ -34,12 +34,12 @@ app.get("/list", (req, res) => {
     });
 });
 
-app.get("/add", (req, res) => {
-  res.render("add.ejs", {});
+app.get("/aanvraag", (req, res) => {
+  res.render("aanvraag.ejs", {});
 });
 
-app.post("/add", (req, res) => {
-  db.collection("products").insertOne(req.body, (err, result) => {
+app.post("/aanvraag", (req, res) => {
+  db.collection("inhaal").insertOne(req.body, (err, result) => {
     if (err) return console.log(err);
     res.redirect("/list");
   });
@@ -49,7 +49,7 @@ app.get("/search", (req, res) => {
   res.render("search.ejs", { product: "" });
 });
 
-// Find a product
+
 app.post("/search", (req, res) => {
   var query = { name: req.body.name };
   db.collection("products")
@@ -61,12 +61,3 @@ app.post("/search", (req, res) => {
     });
 });
 
-app.post("/delete", (req, res) => {
-  db.collection("products").findOneAndDelete(
-    { name: req.body.name },
-    (err, result) => {
-      if (err) return res.send(500, err);
-      res.redirect("/list");
-    }
-  );
-});
