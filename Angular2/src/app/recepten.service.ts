@@ -10,16 +10,17 @@ export class ReceptenService {
 
   SaveRecept(recept: Recept){
     let al_in_storage = false;
-    for (let i = 0; i < localStorage.length; i++){
-      let key = localStorage.key(i);
-      let value = localStorage.getItem(key);
-      let jvalue = JSON.parse(value);
-      if (jvalue.naam == recept.naam){
-        al_in_storage = true;
+    if(localStorage.length > 0){
+      for (let i = 0; i < localStorage.length; i++){
+        let key = localStorage.key(i);
+        if (key == recept.naam){
+          al_in_storage = true;
+        }
       }
     }
     if(!al_in_storage){
-      localStorage.setItem(recept.naam, recept.receptToJsonString());
+      let jsonString = '{ "naam" : ' + recept.naam + '; "aantal_calorien" : ' + recept.aantal_calorien + '; "ingredienten" : ' + recept.ingredienten + '; "benodigde_tijd" : ' + recept.benodigde_tijd + '}'
+      localStorage.setItem(recept.naam, jsonString);
     }
   }  
 }

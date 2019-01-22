@@ -3,19 +3,18 @@
   <h1>Recepten!</h1>
   <h2>Geef een recept in</h2>
   <form (ngSubmit)='nieuwRecept()'>
-
     <div class ='form-group' [formGroup]='recept'>
        <label for = 'naam'>Naam:</label>
-       <input type = 'text' formControlName='start'>
+       <input type = 'text' formControlName='naam'><br />
        <label for = 'aantal_calorien'>Aantal caloriën:</label>
-       <input type = 'text' formControlName='end'>
+       <input type = 'text' formControlName='aantal_calorien'><br />
        <label for = 'ingredienten'>Ingrediënten:</label>
-       <input type = 'text' formControlName='end'>
+       <input type = 'text' formControlName='ingredienten'><br />
        <label for = 'benodigde_tijd'>Benodigde tijd:</label>
-       <input type = 'text' formControlName='end'>
+       <input type = 'text' formControlName='benodigde_tijd'>
     </div>
     <br />
-    <button type='submit' class='btn btn-success'>Zoek</button>
+    <button type='submit' class='btn btn-success'>Geef in</button>
 
 </form>
 

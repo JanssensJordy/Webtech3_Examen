@@ -9,7 +9,4 @@ export class Recept{
         this.ingredienten = ingredienten;
         this.benodigde_tijd = benodigde_tijd;
     }
-    receptToJsonString(): string{
-        return '{ "naam" : ' + this.naam + '; "aantal_calorien" : ' + this.aantal_calorien + '; "ingredienten" : ' + this.ingredienten + '; "benodigde_tijd" : ' + this.benodigde_tijd + '}';
-    }
 }
