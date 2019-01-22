@@ -1,0 +1,40 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div>
+  <h1>Pokemon!</h1>
+  <h2>Zoek op naam</h2>
+  <div>
+    <input type="text" [(ngModel)]="pokemonReq"><br><br>
+    <input type="submit" value="Find" (click)="findPokemon()"><br><br>
+    <h2 *ngIf="foundPokemon">
+      name: {{foundPokemon.name}}<br>
+      type: {{foundPokemon.type}}<br>
+      trainer: {{foundPokemon.trainer}}<br>
+      gender: {{foundPokemon.gender}}<br>
+      owned: {{foundPokemon.owned}}<br>
+    </h2>
+  </div>
+
+  <h2>Zoek tussen datum</h2>
+  <div>
+    Day: <input type="number" min="1" max="31" [(ngModel)]="start_day">
+    Month: <input type="number" min="1" max="12" [(ngModel)]="start_month">
+    Year: <input type="number" [(ngModel)]="start_year"><br /><br />
+    To:<br />
+    Day: <input type="number" min="1" max="31" [(ngModel)]="end_day">
+    Month: <input type="number" min="1" max="12" [(ngModel)]="end_month">
+    Year: <input type="number" [(ngModel)]="end_year">
+    <input type="submit" value="Get" (click)="getPokemons()"><br><br>
+
+
+    <div *ngFor="let item of pokList;">
+      Name: {{item.name}} <br />
+      Type: {{item.type}} <br />
+      Trainer: {{item.trainer}} <br />
+      Gender: {{item.gender}} <br />
+      Owned since: {{item.owned}} <br /><br />
+    </div>
+  </div>
+
+</div>
+
+<router-outlet></router-outlet>
