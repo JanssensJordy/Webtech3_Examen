@@ -30,7 +30,7 @@ app.get("/aanvraag", (req, res) => {
 });
 
 app.post("/aanvraag", (req, res) => {
-  db.collection("inhaal").insertOne(req.body, (err, result) => {
+  db.collection("inhaal").insert({name: req.body.name, examen: req.body.examen, reden: req.body.reden,datum: new Date(Date.now()).toISOString()}, (err, result) => {
     if (err) return console.log(err);
     res.redirect("/search");
   });
@@ -42,8 +42,10 @@ app.get("/search", (req, res) => {
 
 app.post("/list", (req, res) => {
   var query = { name: req.body.name };
+  var mysort = { reden: 1 };
   db.collection("inhaal")
     .find(query)
+    .sort(mysort)
     .toArray(function(err, result) {
       if (err) return console.log(err);
       if (result == "") res.render("search_not_found.ejs", {});
