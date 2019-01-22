@@ -18,6 +18,14 @@
 
 </form>
 
+<ul>
+  <li *ngFor="let item of recepten;">
+    Naam: {{item.naam}}
+    Aantal caloriën: {{item.aantal_calorien}}
+    Ingrediënten: {{item.ingredienten}}
+    Benodigde tijd: {{item.benodigde_tijd}}
+  </li>
+</ul>
 </div>
 
 <router-outlet></router-outlet>

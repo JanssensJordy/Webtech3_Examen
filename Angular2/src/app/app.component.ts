@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ReceptenService } from './recepten.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Recept } from './Recept';
+import { Data } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ import { Recept } from './Recept';
 export class AppComponent {
   title = 'Recepten';
   recept: FormGroup;
+  recepten: Recept [];
 
   ngOnInit() {
     this.recept = new FormGroup({
@@ -29,7 +31,7 @@ export class AppComponent {
     nieuwRecept(){
       let recept: Recept;
       recept = this.recept.value;
-      this.ReceptenService.SaveRecept(recept);
+      this.recepten = this.ReceptenService.SaveRecept(recept, this.recepten);
     }
 
 }

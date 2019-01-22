@@ -8,7 +8,7 @@ export class ReceptenService {
 
   constructor() { }
 
-  SaveRecept(recept: Recept){
+  SaveRecept(recept: Recept, recepten: Recept[]): Recept[]{
     let al_in_storage = false;
     if(localStorage.length > 0){
       for (let i = 0; i < localStorage.length; i++){
@@ -19,8 +19,9 @@ export class ReceptenService {
       }
     }
     if(!al_in_storage){
-      let jsonString = '{ "naam" : ' + recept.naam + '; "aantal_calorien" : ' + recept.aantal_calorien + '; "ingredienten" : ' + recept.ingredienten + '; "benodigde_tijd" : ' + recept.benodigde_tijd + '}'
-      localStorage.setItem(recept.naam, jsonString);
+      localStorage.setItem(recept.naam, JSON.stringify(recept));
+      recepten.push(recept);
     }
+    return recepten;
   }  
 }
